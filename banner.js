@@ -6,6 +6,7 @@
         defaults = {
             delay: 10, // 10 seconds
             repeat: 60 * 12, // 12 hours
+            showingTime: 10, // 10 seconds
             cookieName: 'banner-popup'
         };
 
@@ -66,7 +67,17 @@
         showDelayed: function () {
             setTimeout(function () {
                 this.show();
+
+                if (this.settings.showingTime > 0) {
+                    this.hideDelayed();
+                }
             }.bind(this), this.settings.delay * 1000);
+        },
+
+        hideDelayed: function () {
+            setTimeout(function () {
+                this.close();
+            }.bind(this), this.settings.showingTime * 1000);
         },
 
         show: function () {
